@@ -36,6 +36,9 @@ curl -v localhost:8080/posts/3/disable
 ```
 ### Postman
 A Postman collection for easy testing is available here: https://www.getpostman.com/collections/d58e8c741797b865f437
+HTTP Authentication: Basic
+User: devuser
+Password: devpass
 
 ## APP Links
 ### DB administration
@@ -63,7 +66,7 @@ Swagger UI IS published at; http://localhost:8080/swagger-ui.html
 6. Implemented Swagger documentation for easy
 
 ## Future Plan
-Plan to implement in the future:
-Logging of all controller method either through manual logging or through AOP.
-Unit testing to test DB operations and HTTP Response Status along with Json body.
-Splitting of properties files for PROD and DEV.
+1. Logging of all controller method either through manual logging or through AOP.
+2. Unit testing to test DB operations and HTTP Response Status along with Json body.
+3. plitting of properties files for PROD and DEV.
+4. Move the username/password/role definition into databse.
