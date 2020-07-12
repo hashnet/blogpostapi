@@ -24,18 +24,21 @@ cd blogpostapi
 ## API Explorer
 ### Sample curls
 ```bash
-curl -v localhost:8080/posts
-curl -v localhost:8080/posts -H 'Accept:application/xml' | tidy -xml -iq
-curl -v localhost:8080/posts | json_pp
-curl -v localhost:8080/posts?pageNo=1&pageSize=3&sortDir=desc
-curl -vX POST localhost:8080/posts -H 'Content-type:application/json' -d '{"title": "Some Title", "text": "Some Text"}'
-curl -vX PUT localhost:8080/posts/3 -H 'Content-type:application/json' -d '{"title": "Some Updated Title", "text": "Some Updated Text"}'
-curl -vX DELETE localhost:8080/posts/3
-curl -v localhost:8080/posts/3/enable
-curl -v localhost:8080/posts/3/disable
+curl -v localhost:8080/posts -u devuser:devpass
+curl -v localhost:8080/posts -H 'Accept:application/xml' -u devuser:devpass | tidy -xml -iq
+curl -v localhost:8080/posts -u devuser:devpass | json_pp
+curl -v  -u devuser:devpass localhost:8080/postsbypage?page=1&size=3&sort=title,desc
+curl -vX POST localhost:8080/posts -H 'Content-type:application/json' -d '{"title": "Some Title", "text": "Some Text"}' -u devuser:devpass
+curl -vX PUT localhost:8080/posts/3 -H 'Content-type:application/json' -d '{"title": "Some Updated Title", "text": "Some Updated Text"}' -u devuser:devpass
+curl -vX DELETE localhost:8080/posts/3 -u devuser:devpass
+curl -v localhost:8080/posts/3/enable -u devuser:devpass
+curl -v localhost:8080/posts/3/disable -u devuser:devpass
+curl -v localhost:8080/users -u devuser:devpass
+curl -v localhost:8080/users/5/posts -u devuser:devpass
 ```
 ### Postman
 A Postman collection for easy testing is available here: https://www.getpostman.com/collections/d58e8c741797b865f437
+
 HTTP Authentication: Basic
 User: devuser
 Password: devpass
@@ -43,9 +46,11 @@ Password: devpass
 ## APP Links
 ### DB administration
 Embedded H2 database can be acceessed at: http://localhost:8080/h2-console/
+
 Credentials:
 JDBC URL: jdbc:h2:mem:testdb
 User Name: sa
+
 ### Swagger Documentation
 Swagger api docs are available at: http://localhost:8080/v2/api-docs
 Swagger UI IS published at; http://localhost:8080/swagger-ui.html
