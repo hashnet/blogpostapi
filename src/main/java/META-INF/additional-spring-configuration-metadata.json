@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "app.title",
+    "type": "java.lang.String",
+    "description": "A description for 'app.title'"
+  },
+  {
+    "name": "app.description",
+    "type": "java.lang.String",
+    "description": "A description for 'app.description'"
+  }
+]}
