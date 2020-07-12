@@ -40,7 +40,9 @@ curl -v localhost:8080/users/5/posts -u devuser:devpass
 A Postman collection for easy testing is available here: https://www.getpostman.com/collections/d58e8c741797b865f437
 
 HTTP Authentication: Basic
+
 User: devuser
+
 Password: devpass
 
 ## APP Links
@@ -48,11 +50,14 @@ Password: devpass
 Embedded H2 database can be acceessed at: http://localhost:8080/h2-console/
 
 Credentials:
+
 JDBC URL: jdbc:h2:mem:testdb
+
 User Name: sa
 
 ### Swagger Documentation
 Swagger api docs are available at: http://localhost:8080/v2/api-docs
+
 Swagger UI IS published at; http://localhost:8080/swagger-ui.html
 
 
