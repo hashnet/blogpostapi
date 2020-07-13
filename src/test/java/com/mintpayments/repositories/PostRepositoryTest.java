@@ -1,5 +1,6 @@
-package com.mintpayments.repository;
+package com.mintpayments.repositories;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
@@ -17,7 +18,7 @@ import com.mintpayments.repositories.PostRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BlogPrototypeApplication.class)
-public class RepositoriesTest {
+public class PostRepositoryTest {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -26,7 +27,7 @@ public class RepositoriesTest {
 	
 	@Test
 	@DirtiesContext
-	public void updateTest() {
+	public void updatePostTest() {
 		Post post = postRepository.findById(2L).get();
 		
 		String challenge = "Test Title";
@@ -38,5 +39,14 @@ public class RepositoriesTest {
 		post = postRepository.findById(2L).get();
 		
 		assertEquals(post.getTitle(), challenge);
+	}
+	
+	@Test
+	@DirtiesContext
+	public void deletePostTest() {
+		postRepository.deleteById(3L);
+		
+		Post post = postRepository.findById(3L).orElse(null);
+		assertNull(post);
 	}
 }
