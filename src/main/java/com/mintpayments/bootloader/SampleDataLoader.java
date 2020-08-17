@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.mintpayments.models.Post;
 import com.mintpayments.models.User;
@@ -31,6 +32,8 @@ public class SampleDataLoader {
 	@Autowired
 	private LoginRepository loginRepository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Bean
 	CommandLineRunner loadData() {
@@ -55,9 +58,9 @@ public class SampleDataLoader {
 			
 			//Load login details
 			saveLogin(
-					new Login("ROOT", "root", "ADMIN,USER", true, true, true, true),
-					new Login("USER1", "pass1", "USER", true, true, true, true),
-					new Login("USER2", "pass2", "USER", true, true, true, true));
+					new Login("ROOT", passwordEncoder.encode("root"), "ADMIN,USER", true, true, true, true),
+					new Login("USER1", passwordEncoder.encode("pass1"), "USER", true, true, true, true),
+					new Login("USER2", passwordEncoder.encode("pass2"), "USER", true, true, true, true));
 		};
 	}
 	
