@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.mintpayments.security.models.Login;
 
 public interface LoginRepository extends JpaRepository<Login, Long>{
-	Optional<Login> findByUserName(String userName);
+	Optional<Login> findByUserNameIgnoreCase(String userName);
 }

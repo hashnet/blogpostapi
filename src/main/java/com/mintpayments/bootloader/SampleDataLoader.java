@@ -55,9 +55,9 @@ public class SampleDataLoader {
 			
 			//Load login details
 			saveLogin(
-					new Login("root", "root", "ADMIN,USER", true, true, true, true),
-					new Login("user1", "pass1", "USER", true, true, true, true),
-					new Login("user2", "pass2", "USER", true, true, true, true));
+					new Login("ROOT", "root", "ADMIN,USER", true, true, true, true),
+					new Login("USER1", "pass1", "USER", true, true, true, true),
+					new Login("USER2", "pass2", "USER", true, true, true, true));
 		};
 	}
 	
