@@ -15,6 +15,8 @@ import com.mintpayments.models.Post;
 import com.mintpayments.models.User;
 import com.mintpayments.repositories.PostRepository;
 import com.mintpayments.repositories.UserRepository;
+import com.mintpayments.security.models.Login;
+import com.mintpayments.security.repositories.LoginRepository;
 
 @Configuration
 public class SampleDataLoader {
@@ -23,11 +25,17 @@ public class SampleDataLoader {
 	@Autowired
 	private PostRepository postRepository;
 	
-	@Autowired UserRepository userRepository;
+	@Autowired 
+	private UserRepository userRepository;
+	
+	@Autowired
+	private LoginRepository loginRepository;
+	
 
 	@Bean
 	CommandLineRunner loadData() {
 		return args -> {
+			// Load user and post
 			saveUserAndPost(
 					new User("Henry", "Robert", "Admin", LocalDate.of(1992, 2, 10)), 
 					new Post("My First Post", "This is my first post."),
@@ -44,6 +52,12 @@ public class SampleDataLoader {
 					new Post("My Eighth Post", "This is my eighth post."),
 					new Post("My Ninth Post", "This is my ninth post."),
 					new Post("My Tength Post", "This is my tength post."));
+			
+			//Load login details
+			saveLogin(
+					new Login("root", "root", "ADMIN,USER", true, true, true, true),
+					new Login("user1", "pass1", "USER", true, true, true, true),
+					new Login("user2", "pass2", "USER", true, true, true, true));
 		};
 	}
 	
@@ -57,5 +71,11 @@ public class SampleDataLoader {
 		
 		logger.info("Preloading " + userRepository.save(user));
 		postList.forEach(post -> {logger.info("Preloading " + postRepository.save(post));});
+	}
+	
+	private void saveLogin(Login... logins) {
+		for(Login login: logins) {
+			logger.info("Preloading " + loginRepository.save(login));
+		}
 	}
 }

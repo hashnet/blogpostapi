@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
@@ -25,7 +26,7 @@ import io.swagger.annotations.ApiModelProperty.AccessMode;
 public class Post extends RepresentationModel<Post>{
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(accessMode=AccessMode.READ_ONLY)
 	private Long id;
 	
