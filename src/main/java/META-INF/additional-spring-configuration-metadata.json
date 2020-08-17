@@ -8,5 +8,20 @@
     "name": "app.description",
     "type": "java.lang.String",
     "description": "A description for 'app.description'"
+  },
+  {
+    "name": "app.version",
+    "type": "java.lang.String",
+    "description": "A description for 'app.version'"
+  },
+  {
+    "name": "app.contact.name",
+    "type": "java.lang.String",
+    "description": "A description for 'app.contact.name'"
+  },
+  {
+    "name": "app.contact.email",
+    "type": "java.lang.String",
+    "description": "A description for 'app.contact.email'"
   }
 ]}

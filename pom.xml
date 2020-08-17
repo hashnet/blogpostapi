@@ -9,14 +9,14 @@
 		<version>2.3.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.mintpayments</groupId>
+	<groupId>com.hashdroid</groupId>
 	<artifactId>blog-prototype</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>blog-prototype</name>
 	<description>A tiny project for blog posts</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
