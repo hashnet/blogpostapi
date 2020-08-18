@@ -17,6 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
+	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 		.userDetailsService(userDetailsService);
@@ -29,10 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.mvcMatchers("/users").hasAuthority("ADMIN")
 		.mvcMatchers("/posts").hasAuthority("USER")
-		.antMatchers("/").permitAll()
+		.antMatchers("/**").permitAll()
 		.antMatchers("/h2-console/**").permitAll()				// Takes /h2-console out of Spring Security’s authorization
-        .and().csrf().ignoringAntMatchers("/h2-console/**")		// Turns off CSRF only for /h2-console.
-        .and().headers().frameOptions().sameOrigin()			// Enables loading pages in frames as long as the frames come from our own site
+//      .and().csrf().ignoringAntMatchers("/h2-console/**")		// Turns off CSRF only for /h2-console.
+        .and()
+        .headers().frameOptions().sameOrigin()			// Enables loading pages in frames as long as the frames come from our own site
 		.and()
 		.httpBasic()
 		.and()

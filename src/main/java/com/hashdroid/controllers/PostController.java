@@ -1,8 +1,11 @@
 package com.hashdroid.controllers;
 
+import java.util.Locale;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -21,12 +24,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hashdroid.assemblers.PostModelAssembler;
 import com.hashdroid.exceptions.EntityNotFoundException;
 import com.hashdroid.models.Post;
 import com.hashdroid.repositories.PostRepository;
+import com.hashdroid.services.Translator;
 
 @RestController
 @CrossOrigin(origins="*")
@@ -40,7 +45,10 @@ public class PostController {
 	
 	@Autowired
 	private PagedResourcesAssembler<Post> pagedResourcesAssembler;
-
+	
+	@Autowired
+	private Translator translator;
+	
 	//Paginated
 	@GetMapping("/postsbypage")
 	public ResponseEntity<PagedModel<Post>> getPageablePosts(Pageable pageable) {
@@ -81,21 +89,24 @@ public class PostController {
 	
 	
 	@GetMapping("/users/{id}/posts")
-	public ResponseEntity<CollectionModel<Post>> findEmployees(@PathVariable long id) {
+	public ResponseEntity<CollectionModel<Post>> getPostsByUserId(@PathVariable long id) {
 		
 		return ResponseEntity.ok(
 			postModelAssembler.toCollectionModel(repository.findByUserId(id)));
 	}
 
 	@PutMapping("/posts/{id}")
-	public ResponseEntity<?> updatePost(@RequestBody Post newPost, @PathVariable Long id) {
+	public ResponseEntity<?> updatePost(
+			@RequestBody Post newPost, 
+			@PathVariable Long id) {
+		
 		Post post = repository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
 
 		if (!post.isEnabled()) {
 			return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)
 					.header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
-					.body(Problem.create().withTitle("Operation not allowed")
-							.withDetail("Cannot update a post that is in disabled tatus"));
+					.body(Problem.create().withTitle(translator.toLocale("error.op.not.allowed"))
+							.withDetail(translator.toLocale("error.op.not.allowed.desc")));
 		}
 		
 		if (newPost.getTitle() != null) {
