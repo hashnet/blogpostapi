@@ -29,7 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.csrf().disable()
 		.authorizeRequests()
 		.mvcMatchers("/users").hasAuthority("ADMIN")
-		.mvcMatchers("/posts").hasAuthority("USER")
+		.mvcMatchers("/posts").hasAnyAuthority("USER", "ADMIN")
+		.mvcMatchers("/welcome").permitAll()
 		.antMatchers("/**").permitAll()
 		.antMatchers("/h2-console/**").permitAll()				// Takes /h2-console out of Spring Security’s authorization
 //      .and().csrf().ignoringAntMatchers("/h2-console/**")		// Turns off CSRF only for /h2-console.
